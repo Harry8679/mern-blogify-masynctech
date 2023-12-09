@@ -1,8 +1,13 @@
 const http = require('http');
 const express = require('express');
+const userRoute = require('./routes/user.route');
+require('./config/database')();
 
 // Server
 const app = express();
+app.use(express.json());
+// Routes
+app.use('/api/v1/users', userRoute);
 
 const server = http.createServer(app);
 
