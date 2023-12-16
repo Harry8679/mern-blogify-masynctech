@@ -72,14 +72,16 @@ exports.login = async (req, res) => {
     }
 };
 
-exports.getProfile = async (req, res) => {
+exports.getProfile = async (req, res, next) => {
     // console.log(req.params);
+    const myErr = new Error('This is my custom error');
+    next(myErr);
     try {
         // Get user id from params
         // const id = req.params.id;
         const id = req.userAuth._id;
         const user = await User.findById(id);
-        console.log(user);
+        // console.log(user);
         res.json({
             status: 'success',
             message: 'Profile fetched successfully',

@@ -8,6 +8,20 @@ const app = express();
 app.use(express.json());
 // Routes
 app.use('/api/v1/users', userRoute);
+// ! Error middleware
+app.use((err, req, res, next) => {
+    // Status
+    const status = err?.status ? err.status : 'failed';
+    // Message
+    const message = err?.message;
+    // Stack
+    const stack = err?.stack;
+    res.status(500).json({
+        status,
+        message,
+        stack
+    });
+});
 
 const server = http.createServer(app);
 

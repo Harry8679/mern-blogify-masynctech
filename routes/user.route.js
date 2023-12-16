@@ -6,6 +6,6 @@ const userRoute = express.Router();
 
 userRoute.post('/register', register);
 userRoute.post('/login', login);
-userRoute.post('/profile/:id', isLoggin, getProfile);
+userRoute.post('/profile', isLoggin, getProfile);
 
 module.exports = userRoute;
