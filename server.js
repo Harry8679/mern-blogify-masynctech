@@ -8,6 +8,11 @@ const app = express();
 app.use(express.json());
 // Routes
 app.use('/api/v1/users', userRoute);
+// ?Not Found middleware
+app.use((req, res, next) => {
+    const err = new Error(`Cannot find ${req.originalUrl} on the server`);
+    next(err);
+});
 // ! Error middleware
 app.use((err, req, res, next) => {
     // Status
