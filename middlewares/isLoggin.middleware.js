@@ -13,7 +13,8 @@ const isLoggin = (req, res, next) => {
         req.userAuth = user;
         // save user into req object
         if (err) {
-            return 'Invalid Token';
+            const err = new Error('Token expired or invalid');
+            next(err);
         } else {
             // return decoded;
             // save the user
